@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griglia Campo Minato</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/debug.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+
+
+</head>
+<body>
+    <header>
+        <div class="hea-left">
+            <i class="fa-solid fa-skull fa-3x"></i>
+            <h1>
+                Campo Minato
+            </h1>
+        </div>
+        <div class="hea-right">
+            <label for="select-difficulty">Difficoltà:</label>
+            <select id="select-difficulty">
+                <option class="option-select" selected disabled>Scegli...</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button type="button" id="submit-start">Start</button>
+        </div>
+    </header>
+    <main>
+        <div id="container-grid">
+            <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/lQ7payiGhj5xkyxIg2" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </main>
+    <footer>
+        <h3>
+            by Roberto Larivera
+        </h3>
+    </footer>
+    <script type="text/javascript" src="js/scripts.js"></script>
+</body>
+</html>
