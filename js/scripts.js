@@ -40,7 +40,7 @@ submitStart.addEventListener('click',                   // click su start
         if(selectionDif == 'easy'){
             console.log('Hai inserito EASY');
             // funzione principale
-        createCellGrid(containerGrid,100,'cell-easy');                  //chiamata funzione principale
+        createCellGrid(containerGrid, 100, 'cell-easy', listControlNumber);                  //chiamata funzione principale
         
         }
         else if(selectionDif == 'medium'){
@@ -82,19 +82,22 @@ submitStart.addEventListener('click',                   // click su start
 
 
 
-function createCellGrid(containerGrid,numberN,difS){                 //funzione principale ---- creazione celle dentro griglia 
+function createCellGrid(containerGrid, numberN, difS, nameArray){                 //funzione principale ---- creazione celle dentro griglia 
     containerGrid.innerHTML = "";                       //serve per svuotare il div prima di doverlo riempire
     for (let i = 1 ; i <= numberN ; i++){
-        
+        console.log('Inizio for')
         const newCell = document.createElement('div');
         newCell.classList.add('cell',difS);
-        //newCell.classList.add(difS);
+        
         newCell.innerHTML = i;
         containerGrid.append(newCell);
 
         controlCellActive (newCell, i);                   //chiamata controllo click per cella attiva
-        controlNumberRandom (listControlNumber, 1, 16);       //?
 
+
+        //console.log('nameArray',nameArray);
+            
+        const controlNumber = controlNumberRandom (nameArray, 1, 16);       //creazione e controllo su lista di numero random bomba
     }
 }
 
@@ -111,7 +114,7 @@ function controlCellActive (newCell, i){                          //controllo cl
         
                     }
                 }
-            )
+    )
 }
 
 
@@ -120,11 +123,13 @@ function numberRandom (min, max){
 }
 
 function controlNumberRandom (nameArray, min, max){
-    let numberRandomReturn = numberRandom (min, max);
-    
-    while(nameArray.includes(numberRandomReturn)){
-        numberRandomReturn = numberRandom (min, max);
+    if(nameArray.length < max){
+        let numberRandomReturn = numberRandom (1, 16);
+        while(nameArray.includes(numberRandomReturn)){
+            numberRandomReturn = numberRandom (min, max);
+        }
+        nameArray.push(numberRandomReturn);
+        console.log('console log dentro funzione',nameArray);
+        return numberRandomReturn;
     }
-    nameArray.push(numberRandomReturn);
-    console.log(nameArray);
 }
