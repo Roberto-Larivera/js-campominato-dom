@@ -24,12 +24,20 @@ il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutt
 const containerGrid = document.getElementById('container-grid');
 console.log('containerGrid',containerGrid);
 
-//let numberRandomReturn = numberRandom (1,16);
-//console.log(numberRandomReturn);
-
 const submitStart = document.getElementById('submit-start');
 
 const listControlNumber = [];
+// let gameOver = false;
+// let giocoPerso = false;
+
+// let totalScore = 0;
+// let totalePunti = 0;
+
+
+
+
+
+
 
 submitStart.addEventListener('click',                   // click su start
 
@@ -68,22 +76,6 @@ submitStart.addEventListener('click',                   // click su start
 
 
 
-// let gameOver = false;
-
-// poi
-
-
-
-// e metti questa come prima dentro l'event listener della cella:
-// if (gameOver == true) {
-//                 return;
-// }
-
-
-
-
-
-
 
 
 
@@ -93,9 +85,19 @@ submitStart.addEventListener('click',                   // click su start
 
 
 function createCellGrid(containerGrid, numberN, difS, nameArray){                 //funzione principale ---- creazione celle dentro griglia 
-    containerGrid.innerHTML = "";                     //serve per svuotare il div prima di doverlo riempire
+
+    containerGrid.innerHTML = "";                                                 //serve per svuotare il div prima di doverlo riempire
     nameArray = []
-    controlNumberRandom (nameArray, 1, numberN);       //creazione e controllo su lista di numero random bomba
+
+    let gameOver = false;
+    let giocoPerso = false;
+
+    let totalScore = 0;
+    console.log('totalScore',totalScore);
+    let totalePunti = 0;
+
+    controlNumberRandom (nameArray, 1, numberN);                                  //creazione e controllo su lista di numero random bomba
+    
     for (let i = 1 ; i <= numberN ; i++){
         console.log('Inizio for')
         
@@ -105,7 +107,7 @@ function createCellGrid(containerGrid, numberN, difS, nameArray){               
         newCell.innerHTML = i;
         containerGrid.append(newCell);
 
-        controlCellActive (newCell, i, nameArray);                   //chiamata controllo click per cella attiva
+        controlCellActive (newCell, i, nameArray, gameOver, totalScore);                   //chiamata controllo click per cella attiva
 
 
         //console.log('nameArray',nameArray);
@@ -113,36 +115,59 @@ function createCellGrid(containerGrid, numberN, difS, nameArray){               
     }
 }
 
-function controlCellActive (newCell, i, nameArray){                          //controllo click per cella attiva
-    newCell.addEventListener('click',
+function controlCellActive (newCell, i, nameArray, gameOver, totalScore){                          //controllo click per cella attiva
+    
+        newCell.addEventListener('click',
                 function () {
-                    
-                    if(newCell.classList.contains('cell-active')){
-                        newCell.classList.remove('cell-active');
-                        console.log('Hai cliccato su ', i);
+                    if(gameOver == true){
+                        alert('Hai perso la Partita')
                     }
                     else{
-                        if(nameArray.includes(i)){
-                            newCell.classList.add('cell-bomb');
-                            console.log('Hai cliccato su ', i, 'Bomba');
-                            alert('Bomba');
+                        
+                        if(newCell.classList.contains('cell-active')){
+                            newCell.classList.remove('cell-active');
+                            console.log('Hai cliccato su ', i);
+                            totalScore--;
+                            console.log('totalScore',totalScore);
+                            //totalePunti--;
                         }
                         else{
-                            newCell.classList.add('cell-active');
-                            console.log('Hai cliccato su ', i);
-
+                            if(nameArray.includes(i)){
+                                newCell.classList.add('cell-bomb');
+                                console.log('Hai cliccato su ', i, 'Bomba');
+                                alert('Bomba');
+                                gameOver = true;
+    
+                            }
+                            else{
+                                newCell.classList.add('cell-active');
+                                console.log('Hai cliccato su ', i);
+                                totalScore++;
+                                console.log('totalScore',totalScore);
+                                //totalePunti++;
+                            }
+            
                         }
-        
                     }
-                }
-    )
-}
 
+                        
+                    console.log('Il tuo punteggio è:', totalScore);
+                    //console.log('Il tuo punteggio è:', totalePunti);
+                }
+        )
+    }
+
+
+
+
+
+
+
+//  GENERATORE NUMERI RANDOM PER BOMBA
 
 function numberRandom (min, max){
     return Math.floor(Math.random () * (max - min + 1) + min);
 }
-
 function controlNumberRandom (nameArray, min, max){
     for(let i = 1 ; i <= 16; i++){
         if(nameArray.length < max){
@@ -151,8 +176,8 @@ function controlNumberRandom (nameArray, min, max){
                 numberRandomReturn = numberRandom (min, max);
             }
             nameArray.push(numberRandomReturn);
-            console.log('console log dentro funzione',nameArray);
         }
-
+        
     }
+    console.log('console log dentro funzione',nameArray);
 }
