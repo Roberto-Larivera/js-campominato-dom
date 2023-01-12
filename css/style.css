@@ -75,6 +75,10 @@ main #container-grid{
 #container-grid .cell-active{
     background-color: aqua;
 }
+#container-grid .cell-bomb{
+    background-color: red;
+    color: azure;
+}
 
 
 #select-difficulty{

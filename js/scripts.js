@@ -2,10 +2,10 @@ console.log('int ok');
 
 /*
 
-- Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
+- Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.          //ok
 
 - Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell'array delle bombe non potranno esserci due numeri uguali.
----- creare un controllo di numeri che non si ripetono
+---- creare un controllo di numeri che non si ripetono                                          //ok 1/2
 
 - in seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - 
 abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina.
@@ -40,19 +40,20 @@ submitStart.addEventListener('click',                   // click su start
         if(selectionDif == 'easy'){
             console.log('Hai inserito EASY');
             // funzione principale
-        createCellGrid(containerGrid, 100, 'cell-easy', listControlNumber);                  //chiamata funzione principale
+            createCellGrid(containerGrid, 100, 'cell-easy', listControlNumber);                  //chiamata funzione principale
+
         
         }
         else if(selectionDif == 'medium'){
             console.log('Hai inserito MEDIUM');
             // funzione principale
-        createCellGrid(containerGrid,81,'cell-medium');                  //chiamata funzione principale
+            createCellGrid(containerGrid,81,'cell-medium');                  //chiamata funzione principale
         
         }
         else if(selectionDif == 'hard'){
             console.log('Hai inserito HARD');
             // funzione principale
-        createCellGrid(containerGrid,49,'cell-hard');                  //chiamata funzione principale
+            createCellGrid(containerGrid,49,'cell-hard');                  //chiamata funzione principale
         
         }
         else{
@@ -67,7 +68,16 @@ submitStart.addEventListener('click',                   // click su start
 
 
 
+// let gameOver = false;
 
+// poi
+
+
+
+// e metti questa come prima dentro l'event listener della cella:
+// if (gameOver == true) {
+//                 return;
+// }
 
 
 
@@ -83,34 +93,45 @@ submitStart.addEventListener('click',                   // click su start
 
 
 function createCellGrid(containerGrid, numberN, difS, nameArray){                 //funzione principale ---- creazione celle dentro griglia 
-    containerGrid.innerHTML = "";                       //serve per svuotare il div prima di doverlo riempire
+    containerGrid.innerHTML = "";                     //serve per svuotare il div prima di doverlo riempire
+    nameArray = []
+    controlNumberRandom (nameArray, 1, numberN);       //creazione e controllo su lista di numero random bomba
     for (let i = 1 ; i <= numberN ; i++){
         console.log('Inizio for')
+        
         const newCell = document.createElement('div');
         newCell.classList.add('cell',difS);
         
         newCell.innerHTML = i;
         containerGrid.append(newCell);
 
-        controlCellActive (newCell, i);                   //chiamata controllo click per cella attiva
+        controlCellActive (newCell, i, nameArray);                   //chiamata controllo click per cella attiva
 
 
         //console.log('nameArray',nameArray);
             
-        const controlNumber = controlNumberRandom (nameArray, 1, 16);       //creazione e controllo su lista di numero random bomba
     }
 }
 
-function controlCellActive (newCell, i){                          //controllo click per cella attiva
+function controlCellActive (newCell, i, nameArray){                          //controllo click per cella attiva
     newCell.addEventListener('click',
                 function () {
+                    
                     if(newCell.classList.contains('cell-active')){
                         newCell.classList.remove('cell-active');
                         console.log('Hai cliccato su ', i);
                     }
                     else{
-                        newCell.classList.add('cell-active');
-                        console.log('Hai cliccato su ', i);
+                        if(nameArray.includes(i)){
+                            newCell.classList.add('cell-bomb');
+                            console.log('Hai cliccato su ', i, 'Bomba');
+                            alert('Bomba');
+                        }
+                        else{
+                            newCell.classList.add('cell-active');
+                            console.log('Hai cliccato su ', i);
+
+                        }
         
                     }
                 }
@@ -123,13 +144,15 @@ function numberRandom (min, max){
 }
 
 function controlNumberRandom (nameArray, min, max){
-    if(nameArray.length < max){
-        let numberRandomReturn = numberRandom (1, 16);
-        while(nameArray.includes(numberRandomReturn)){
-            numberRandomReturn = numberRandom (min, max);
+    for(let i = 1 ; i <= 16; i++){
+        if(nameArray.length < max){
+            let numberRandomReturn = numberRandom (min, max);
+            while(nameArray.includes(numberRandomReturn)){
+                numberRandomReturn = numberRandom (min, max);
+            }
+            nameArray.push(numberRandomReturn);
+            console.log('console log dentro funzione',nameArray);
         }
-        nameArray.push(numberRandomReturn);
-        console.log('console log dentro funzione',nameArray);
-        return numberRandomReturn;
+
     }
 }
