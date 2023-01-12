@@ -24,7 +24,12 @@ il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutt
 const containerGrid = document.getElementById('container-grid');
 console.log('containerGrid',containerGrid);
 
+//let numberRandomReturn = numberRandom (1,16);
+//console.log(numberRandomReturn);
+
 const submitStart = document.getElementById('submit-start');
+
+const listControlNumber = [];
 
 submitStart.addEventListener('click',                   // click su start
 
@@ -88,6 +93,7 @@ function createCellGrid(containerGrid,numberN,difS){                 //funzione 
         containerGrid.append(newCell);
 
         controlCellActive (newCell, i);                   //chiamata controllo click per cella attiva
+        controlNumberRandom (listControlNumber, 1, 16);       //?
 
     }
 }
@@ -106,4 +112,19 @@ function controlCellActive (newCell, i){                          //controllo cl
                     }
                 }
             )
+}
+
+
+function numberRandom (min, max){
+    return Math.floor(Math.random () * (max - min + 1) + min);
+}
+
+function controlNumberRandom (nameArray, min, max){
+    let numberRandomReturn = numberRandom (min, max);
+    
+    while(nameArray.includes(numberRandomReturn)){
+        numberRandomReturn = numberRandom (min, max);
+    }
+    nameArray.push(numberRandomReturn);
+    console.log(nameArray);
 }
