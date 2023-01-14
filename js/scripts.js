@@ -29,18 +29,16 @@ const submitStart = document.getElementById('submit-start');
 const listControlNumber = [];
 let gameWin = false;
 let gameOver = false;
-let giocoPerso = false;
 
 let totalScore = 0;
 console.log('totalScore',totalScore);
-let totalePunti = 0;
-console.log('totalePunti',totalePunti);
+
 
 const scoreLive = document.getElementById('score-live');
 
 const alertWin = document.getElementById('alert-win-doc');
 const alertWinTitle = document.createElement('h3');
-alertWin.classList.add('alert-win');
+
 
 
 
@@ -53,20 +51,20 @@ submitStart.addEventListener('click',                   // click su start
         if(selectionDif == 'easy'){
             console.log('Hai inserito EASY');
             // funzione principale
-            createCellGrid(containerGrid, 100, 'cell-easy', listControlNumber, gameOver, totalScore);                  //chiamata funzione principale
+            createCellGrid(containerGrid, 100, 'cell-easy', listControlNumber);                  //chiamata funzione principale
 
         
         }
         else if(selectionDif == 'medium'){
             console.log('Hai inserito MEDIUM');
             // funzione principale
-            createCellGrid(containerGrid,81,'cell-medium', listControlNumber, gameOver. totalScore);                  //chiamata funzione principale
+            createCellGrid(containerGrid,81,'cell-medium', listControlNumber);                  //chiamata funzione principale
         
         }
         else if(selectionDif == 'hard'){
             console.log('Hai inserito HARD');
             // funzione principale
-            createCellGrid(containerGrid,49,'cell-hard', listControlNumber, gameOver. totalScore);                  //chiamata funzione principale
+            createCellGrid(containerGrid,49,'cell-hard', listControlNumber);                  //chiamata funzione principale
         
         }
         else{
@@ -89,25 +87,22 @@ submitStart.addEventListener('click',                   // click su start
 
 
 
-function createCellGrid(containerGrid, numberN, difS, nameArray, gameOver, totalScore){                 //funzione principale ---- creazione celle dentro griglia 
+function createCellGrid(containerGrid, numberN, difS, nameArray){                 //funzione principale ---- creazione celle dentro griglia 
 
     containerGrid.innerHTML = "";                                                 //serve per svuotare il div prima di doverlo riempire
     nameArray = []
 
     gameWin = false;
-    gameOver = false;                                       //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-    giocoPerso = false;                                     //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-
-    totalScore = 0;                                         //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-    //console.log('totalScore',totalScore);                   //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-    totalePunti = 0;                                        //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-    //console.log('totalePunti',totalePunti);                 //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
+    gameOver = false;
+    
+    totalScore = 0;
+    scoreLive.innerHTML = `Score: ${totalScore}`;
 
     alertWinTitle.innerHTML= '';
+    alertWin.classList.remove('alert-win');
     controlNumberRandom (nameArray, 1, numberN);                                  //creazione e controllo su lista di numero random bomba
     
     for (let i = 1 ; i <= numberN ; i++){
-        console.log('Inizio for')
         
         const newCell = document.createElement('div');
         newCell.classList.add('cell',difS);
@@ -115,27 +110,22 @@ function createCellGrid(containerGrid, numberN, difS, nameArray, gameOver, total
         newCell.innerHTML = i;
         containerGrid.append(newCell);
 
-        controlCellActive (newCell, i, nameArray, numberN, gameOver, gameWin, totalScore, containerGrid);                   //chiamata controllo click per cella attiva          //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
+        controlCellActive (newCell, i, nameArray, numberN);                   //chiamata controllo click per cella attiva         
 
-        //console.log('TOTALSCORE DOPO FUNZIONE:', totalScore);                //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-        //console.log('TOTALE PUNTI DOPO FUNZIONE:', totalePunti);               //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-
-
-        //console.log('nameArray',nameArray);
             
     }
 }
 
-function controlCellActive (newCell, i, nameArray, numberN, gameOver, totalScore, containerGrid){                          //controllo click per cella attiva       //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
+function controlCellActive (newCell, i, nameArray, numberN){                          //controllo click per cella attiva       
     
         newCell.addEventListener('click',
                 function () {
-                    if(gameOver == true || giocoPerso == true){         //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                        alert('Hai perso la Partita')
+                    if(gameOver == true){
+                        alert('Hai perso la Partita, inizia una nuova partita inserendo una difficoltà e premendo Start')
                     }
 
                     else if(gameWin == true){
-                        alert('Hai Vinto la Partita, inizia una nuova partita')
+                        alert('Hai vinto la Partita, inizia una nuova partita inserendo una difficoltà e premendo Start')
                     }
                     else{
                         
@@ -143,35 +133,38 @@ function controlCellActive (newCell, i, nameArray, numberN, gameOver, totalScore
                         if(newCell.classList.contains('cell-active')){
                             newCell.classList.remove('cell-active');
                             console.log('Hai cliccato su ', i);
-                            totalScore--;                                      //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                            console.log('totalScore',totalScore);             //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                            totalePunti--;                                    //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                            console.log('totalePunti -',totalePunti);           //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
+                            totalScore--; 
                         }
                         else{
                             if(nameArray.includes(i)){
+                                for(let i = 1 ; i <= numberN; i++){
+                                    console.log('dentro i for');
+                                    if(nameArray.includes(i)){
+                                        console.log('dentro i for if');
+                                        document.querySelector(`.cell:nth-child(${i})`).classList.add('cell-bomb');
+                                    }
+                                    
+                                }
                                 newCell.classList.add('cell-bomb');
                                 console.log('Hai cliccato su ', i, 'Bomba');
-                                //alert('Bomba');
-                                gameOver = true;                            //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                                giocoPerso = true;                          //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
+                                gameOver = true;
                                 alertWinTitle.innerHTML = 'Hai perso!!!';
+                                alertWin.classList.add('alert-win');
+                                alertWin.classList.add('al-over');
                                 alertWin.append(alertWinTitle);
-    
                             }
                             else{
                                 newCell.classList.add('cell-active');
                                 console.log('Hai cliccato su ', i);
-                                totalScore++;                                   //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                                console.log('totalScore',totalScore);           //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                                totalePunti++;                                  //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                                console.log('totalePunti +',totalePunti);         //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                                if(totalePunti == (numberN - nameArray.length)){
-
-                                   alert('Hai vinto la Partita');
+                                totalScore++;
+                                
+                                if(totalScore == (numberN - nameArray.length)){
                                    
                                    alertWinTitle.innerHTML = 'Hai vinto!!!';
+                                   alertWin.classList.add('alert-win');
+                                   alertWin.classList.add('al-win');
                                    alertWin.append(alertWinTitle);
+
                                    
                                    gameWin = true;
                                 }
@@ -180,12 +173,18 @@ function controlCellActive (newCell, i, nameArray, numberN, gameOver, totalScore
                         }
                     }
 
-                    scoreLive.innerHTML = `Score: ${totalePunti}`;
-                    console.log('Il tuo punteggio è:', totalScore);                //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
-                    console.log('Il tuo punteggio è:', totalePunti);               //****************  DA CONTROLLARE PERCHè NON VA CON L'ARGOMENTO MA CON LA COSTANTE DIRETTA FUNZIONA/
+                    scoreLive.innerHTML = `Score: ${totalScore}`;
+                    console.log('Il tuo punteggio è:', totalScore);
                 }
         )
     }
+
+
+
+
+
+
+
 
 
 
@@ -209,5 +208,7 @@ function controlNumberRandom (nameArray, min, max){
         }
         
     }
-    console.log('console log dentro funzione',nameArray.sort());
+    console.log('Numeri Random Verificati',nameArray.sort());
 }
+
+
