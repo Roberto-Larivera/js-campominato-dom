@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campo Minato</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/debug.css">
     <link rel="stylesheet" href="css/common.css">
@@ -34,14 +38,23 @@
             <button type="button" id="submit-start">Start</button>
         </div>
     </header>
-    <main>
+    <main id="main-doc">
+        <div id="alert-win-doc"></div>
         <div id="container-grid">
-            <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/lQ7payiGhj5xkyxIg2" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+            <div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/lQ7payiGhj5xkyxIg2" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+        </div>
     </main>
     <footer>
-        <h3>
-            by Roberto Larivera
-        </h3>
+        <div class="foot-left">
+            <h3>
+                by Roberto Larivera & Boolean Student
+            </h3>
+        </div>
+        <div class="foot-right">
+            <h4 id="score-live">
+                Score:
+            </h4>
+        </div>
     </footer>
     <script type="text/javascript" src="js/scripts.js"></script>
 </body>

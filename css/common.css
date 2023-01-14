@@ -4,3 +4,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+@font-face {
+    font-family: 'BaksoSapi';
+    src: url(../font/BaksoSapi.otf);
+  }
