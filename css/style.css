@@ -98,7 +98,13 @@ main #container-grid{
     border: none;
     border-radius: 25px;
     cursor: pointer;
+    transition-duration: 0.5s;
 }
+#submit-start:hover{
+    color: white;
+    box-shadow: 0px 0px 25px 2px rgba(255,165,0,0.5);
+}
+
 .al-win{
     background-color: green;
 
@@ -121,11 +127,6 @@ main #container-grid{
 
 .hea-left h1{
     margin-left: 20px;
-}
-.screen-maps{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.635);
 }
 
 .foot-left a{

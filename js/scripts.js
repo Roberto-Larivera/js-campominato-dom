@@ -148,7 +148,7 @@ function controlCellActive (newCell, i, nameArray, numberN){                    
                                 newCell.classList.add('cell-bomb');
                                 console.log('Hai cliccato su ', i, 'Bomba');
                                 gameOver = true;
-                                alertWinTitle.innerHTML = 'Hai perso!!!';
+                                alertWinTitle.innerHTML = 'Game Over!!!';
                                 alertWin.classList.add('alert-win');
                                 alertWin.classList.add('al-over');
                                 alertWin.append(alertWinTitle);
@@ -160,7 +160,7 @@ function controlCellActive (newCell, i, nameArray, numberN){                    
                                 
                                 if(totalScore == (numberN - nameArray.length)){
                                    
-                                   alertWinTitle.innerHTML = 'Hai vinto!!!';
+                                   alertWinTitle.innerHTML = 'Game Win!!!';
                                    alertWin.classList.add('alert-win');
                                    alertWin.classList.add('al-win');
                                    alertWin.append(alertWinTitle);
