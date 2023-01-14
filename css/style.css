@@ -87,9 +87,17 @@ main #container-grid{
     padding: 5px;
     width: 150px;
     margin: 0 10px;
+    border: none;
+    border-radius: 25px;
+    background-color: #efefef;
+    cursor: pointer;
 }
 #submit-start{
-    padding: 5px 20px;
+    padding: 10px 20px;
+    background-color: orange;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
 }
 .al-win{
     background-color: green;
@@ -118,4 +126,9 @@ main #container-grid{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.635);
+}
+
+.foot-left a{
+    text-decoration: none;
+    color: black;
 }
